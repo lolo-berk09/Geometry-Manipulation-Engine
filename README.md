@@ -46,5 +46,6 @@ Potential future improvements:
 - improving current mathematical explanations
 - additional design and visual features
 ---
-## 
+## Author
+Created by Lauren Berkley as part of the NASA/Hackclub Stardance Challenge
 
