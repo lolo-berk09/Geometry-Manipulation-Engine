@@ -1,0 +1,327 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Segoe UI" , "Helvetica Neue" , sans-serif;
+    background: #10141d;
+    color: #edf2fa;
+}
+
+.topbar {
+    position: relative;
+    min-height: 125px;
+    padding: 12px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    background-color: #171717;
+    background-image:
+        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255,255,0.035) 1px, transparent 1px);
+    background-size: 32px 32px;
+
+    border-bottom: 8px solid #39b875;
+}
+
+.topbar h1 {
+    margin: 0;
+    color: #39b875;
+    font-family: 'Press Start 2P' monospace;
+    font-size: clamp(18px, 2.5vw, 32px);
+    line-height: 1.4;
+    text-transform: uppercase;
+}
+
+.topbar p {
+    margin: 5px 0 0;
+    color: #ffffff;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 9px;
+}
+
+#toggle-intersections {
+    position: absolute;
+    bottom: 12px;
+    right: 24px;
+    left: auto;
+    top: auto;
+    padding: 5px 8px;
+    background: #ffffff;
+    color: #1a2230;
+    border: 1px solid #1a2230;
+    border-radius: 5px;
+    font-size: 11px;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+#toggle-intersections.active {
+    background: #3fce82;
+    color: #ffffff;
+}
+
+#toggle-intersections.inactive {
+    background: #ffffff;
+    color: #1a2230;
+}
+
+.app {
+    display: grid;
+    grid-template-columns: 190px minmax(0, 1fr);
+    min-height: calc(100vh - 90px);
+}
+
+.toolbar {
+    padding: 18px;
+    background: #3fce82;
+    background-image:
+        linear-gradient(rgba(5, 12, 30, 0.48), rgba(5, 12, 30, 0.48)),
+        url("toolbar-background.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-right: 3px solid #39b875;
+}
+
+.toolbar h2 {
+    margin-top: 0;
+    margin-bottom: 22px;
+    color: #39b875;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 13px;
+    line-height: 1.8;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.toolbar button {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 12px 8px;
+
+    font-family: 'Press Start 2P', monospace;
+    font-size: 9px;
+    line-height: 1.8;
+    text-align: center;
+
+    color: #39b875;
+    background: #101a32;
+    border: 2px solid #287d58;
+    border-radius: 2px;
+
+    cursor: pointer;
+    transition: background-color 0.15s, border-color 0.15s;
+}
+
+.toolbar button:hover {
+    background: #1c3b3b;
+    border-color: #39b875;
+    color: #ffffff;
+}
+
+.toolbar button.active {
+    background: #39b875;
+    border-color: #8affb9;
+    color: #101a32;
+}
+
+#status {
+    margin-top: 22px;
+    color: #fbfdff;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.workspace {
+    min-width: 0;
+    min-height: 0;
+    padding: 12px;
+}
+
+#canvas {
+    display: block;
+    width: 100%;
+    height: calc(100vh - 126px);
+    min-height: 480px;
+    background: #0c1119;
+    border: 1px solid #30394a;
+    border-radius: 8px;
+}
+
+/* Mathematical coordinate plane */
+
+/*minor grid lines */
+.grid-lines {
+    stroke: #283345;
+    stroke-width: 1;
+    stroke-opacity: 0.3;
+}
+
+/* Major grid lines */
+.grid-lines-major {
+    stroke: #64748b;
+    stroke-width: 1.2;
+    stroke-opacity: 0.65;
+}
+
+/* Coordinate axes */
+.axis-line {
+    stroke: #94a3b8;
+    stroke-width: 1.5;
+}
+
+#canvas {
+    cursor: crosshair;
+    touch-action: manipulation;
+}
+
+.axis-line {
+    stroke: #94a3b8;
+    stroke-width: 1.5;
+}
+
+.axis-label {
+    fill: #aab7cc;
+    font-size: 12px;
+    font-family: "Segoe UI" , "Helvetica Neue" , sans-serif;
+    user-select: none;
+    pointer-events: none;
+}
+
+/* Zoom controls at the bottom of the toolbar */
+.zoom-controls {
+    display: grid;
+    grid-template-columns: 40px minmax(45px, 1fr) 40px;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 0;
+    margin-top: 12px;
+}
+
+.zoom-controls button {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    padding: 8px 4px;
+    border: 1px solid #b8c4d6;
+    border-radius: 6px;
+    background: #ffffff;
+    color: #24344d;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.zoom-controls button:hover {
+    background: #e8eef7;
+}
+
+#zoom-level {
+    text-align: center;
+    white-space: nowrap;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* put reset on its own row */
+#zoom-reset {
+    grid-column: 1 / -1;
+}
+
+#zoom-level {
+    min-width: 55px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Temporary point preview while placing geometry  */
+.preview-point {
+    fill: #38bdf8;
+    fill-opacity: 0.45;
+    stroke: #7dd3fc;
+    stroke-width: 2;
+    pointer-events: none;
+}
+
+/* Math Exlporer */
+
+.math-explorer {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    width: 300px;
+    max-height: 420px;
+    background: #101a32;
+    color: #ffffff;
+    border: 2px solid #39b875;
+    border-radius: 2px;
+    z-index: 1000;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+
+.math-explorer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 14px;
+    background-color: #171717;
+    background-size: 16px 16px;
+    border-bottom: 2px solid #39b875;
+    cursor: grab;
+    user-select: none;
+}
+
+.math-explorer-header h2 {
+    margin: 0;
+    font-size: 17px;
+}
+
+#math-explorer-toggle {
+    background: transparent;
+    color: white;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.math-explorer-content {
+    padding: 16px;
+    overflow-y: auto;
+    max-height: 340px;
+}
+
+.math-explorer-content h3 {
+    margin-top: 0;
+}
+
+.math-explorer-content p {
+    color: #c5ceda;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+#equation-library-button {
+    width: 100%;
+    margin-top: 12px;
+    padding: 10px;
+    background: #3fce82;
+    color: #07120a;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#equation-library-button:hover {
+    background: #16e653;
+}
