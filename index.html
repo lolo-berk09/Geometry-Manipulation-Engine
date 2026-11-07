@@ -12,10 +12,103 @@
         <header class="topbar">
             <h1>Geometry Engine</h1>
             <p>Interactive Geometry Visualization Workspace</p>
+
+            <button id="user-guide-button" type="button">
+                User Guide
+            </button>
+
             <button id="toggle-intersections" type="button">
             Hide Intersections & Angles
         </button>
     </header>
+
+    
+<!-- User Guide Modal -->
+<div id="user-guide-modal" class="guide-modal" style="display: none;">
+
+    <div class="guide-content">
+
+        <!-- Header -->
+        <div class="guide-header">
+
+            <h2 id="guide-slide-title">Getting Started</h2>
+
+            <button id="close-user-guide" type="button"
+                aria-label="Close User Guide">
+                &times;
+            </button>
+
+        </div>
+
+        <!-- Slide Content -->
+        <div class="guide-slide">
+
+            <div class="guide-visual" id="guide-slide-visual">
+                📐
+            </div>
+
+            <h3 id="guide-slide-heading">
+                Welcome to the Geometry Engine!
+            </h3>
+
+            <p id="guide-slide-description">
+                Explore an interactive coordinate plane where
+                you can create geometric objects and investigate
+                their mathematical properties.
+            </p>
+
+        </div>
+
+        <!-- Progress Indicators -->
+        <div class="guide-progress">
+
+            <button class="guide-dot active" data-slide="0"
+                aria-label="Slide 1"></button>
+
+            <button class="guide-dot" data-slide="1"
+                aria-label="Slide 2"></button>
+
+            <button class="guide-dot" data-slide="2"
+                aria-label="Slide 3"></button>
+
+            <button class="guide-dot" data-slide="3"
+                aria-label="Slide 4"></button>
+
+            <button class="guide-dot" data-slide="4"
+                aria-label="Slide 5"></button>
+
+        </div>
+
+        <!-- Navigation -->
+        <div class="guide-navigation">
+
+            <button id="guide-skip" type="button">
+                Skip Tutorial
+            </button>
+
+            <div class="guide-navigation-right">
+
+                <button id="guide-previous" type="button">
+                    Previous
+                </button>
+
+                <button id="guide-next" type="button">
+                    Next
+                </button>
+
+                <button id="guide-finish" type="button"
+                    style="display: none;">
+                    Finish
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
 
         <main class="app">
             <aside class="toolbar">
@@ -95,6 +188,243 @@
             Equation Library
         </button>
 
+                <!-- Equation Library View -->
+
+        <div id="equation-library-view" style="display: none;">
+
+            <button id="back-to-math-explorer" type="button">
+                 <span class="back-arrow">←</span>
+                 <span>Back to Math Explorer</span>
+            </button>
+
+            <div class="equation-library-header">
+                <h3>Equation Library</h3>
+                <p>
+                    Explore important geometry formulas,
+                    their meanings, and how to use them.
+                </p>
+            </div>
+
+            <div id="equation-library-list">
+
+                <!-- Coordinate Geometry -->
+                <h3 class="equation-category">
+                    Coordinate Geometry
+                </h3>
+
+                <div class="equation-card">
+                    <button class="equation-toggle" type="button">
+                        <span>Distance Formula</span>
+                        <span class="equation-arrow">▼</span>
+                    </button>
+                    <div class="equation-content">
+                        <p class="equation-formula">
+                            d = √((x₂ − x₁)² + (y₂ − y₁)²)
+                        </p>
+                        <p><strong>Purpose:</strong> Calculates the distance between two points on a coordinate plane.</p>
+                        <p><strong>Variables:</strong> (x₁, y₁) and (x₂, y₂) represent the coordinates of the two points.</p>
+                        <p><strong>When to use it:</strong> When finding the length of a line segment between two known points.</p>
+                    </div>
+                </div>
+
+                <div class="equation-card">
+                    <button class="equation-toggle" type="button">
+                        <span>Midpoint Formula</span>
+                        <span class="equation-arrow">▼</span>
+                    </button>
+                    <div class="equation-content">
+                        <p class="equation-formula">
+                            M = ((x₁ + x₂)/2, (y₁ + y₂)/2)
+                        </p>
+                        <p><strong>Purpose:</strong> Finds the exact midpoint between two points.</p>
+                        <p><strong>Variables:</strong> The two coordinate pairs represent the endpoints of a line segment.</p>
+                        <p><strong>When to use it:</strong> When finding the point halfway between two endpoints.</p>
+                    </div>
+                </div>
+
+                <div class="equation-card">
+                    <button class="equation-toggle" type="button">
+                        <span>Slope Formula</span>
+                        <span class="equation-arrow">▼</span>
+                    </button>
+                    <div class="equation-content">
+                        <p class="equation-formula">
+                            m = (y₂ − y₁)/(x₂ − x₁)
+                        </p>
+                        <p><strong>Purpose:</strong> Measures the steepness and direction of a line.</p>
+                        <p><strong>Variables:</strong> The coordinates represent two points on the line.</p>
+                        <p><strong>When to use it:</strong> When determining whether a line rises, falls, or is horizontal. Vertical lines have undefined slope.</p>
+                    </div>
+                </div>
+
+                <!-- Triangles -->
+                <h3 class="equation-category">
+                    Triangles
+                </h3>
+
+                <div class="equation-card">
+                    <button class="equation-toggle" type="button">
+                        <span>Triangle Area</span>
+                        <span class="equation-arrow">▼</span>
+                    </button>
+                    <div class="equation-content">
+                        <p class="equation-formula">
+                            A = ½bh
+                        </p>
+                        <p><strong>Purpose:</strong> Calculates the area enclosed by a triangle.</p>
+                        <p><strong>Variables:</strong> b = base length; h = perpendicular height.</p>
+                        <p><strong>When to use it:</strong> When the base and corresponding height are known.</p>
+                    </div>
+                </div>
+
+                <div class="equation-card">
+                    <button class="equation-toggle" type="button">
+                        <span>Heron's Formula</span>
+                        <span class="equation-arrow">▼</span>
+                    </button>
+                    <div class="equation-content">
+                        <p class="equation-formula">
+                            A = √(s(s − a)(s − b)(s − c))
+                        </p>
+                        <p><strong>Purpose:</strong> Calculates a triangle's area using only its three side lengths.</p>
+                        <p><strong>Variables:</strong> a, b, and c are side lengths; s = (a + b + c)/2 is the semiperimeter.</p>
+                        <p><strong>When to use it:</strong> When all three sides are known but the height is not.</p>
+                    </div>
+                </div>
+
+                <div class="equation-card">
+                    <button class="equation-toggle" type="button">
+                        <span>Triangle Angle Sum</span>
+                        <span class="equation-arrow">▼</span>
+                    </button>
+                    <div class="equation-content">
+                        <p class="equation-formula">
+                            A + B + C = 180°
+                        </p>
+                        <p><strong>Purpose:</strong> Describes the relationship between a triangle's interior angles.</p>
+                        <p><strong>When to use it:</strong> When finding an unknown interior angle.</p>
+                    </div>
+                </div>
+
+                <!-- Polygons -->
+                <h3 class="equation-category">
+                    Polygons
+                </h3>
+
+                <div class="equation-card">
+                    <button class="equation-toggle" type="button">
+                        <span>Polygon Perimeter</span>
+                        <span class="equation-arrow">▼</span>
+                    </button>
+                    <div class="equation-content">
+                        <p class="equation-formula">
+                            P = s₁ + s₂ + ... + sₙ
+                        </p>
+                        <p><strong>Purpose:</strong> Calculates the total distance around a polygon.</p>
+                        <p><strong>Variables:</strong> Each s represents the length of one side.</p>
+                        <p><strong>When to use it:</strong> When finding the total boundary length of a polygon.</p>
+                    </div>
+                </div>
+
+                <div class="equation-card">
+                    <button class="equation-toggle" type="button">
+                        <span>Interior Angle Sum</span>
+                        <span class="equation-arrow">▼</span>
+                    </button>
+                    <div class="equation-content">
+                        <p class="equation-formula">
+                            S = (n − 2) × 180°
+                        </p>
+                        <p><strong>Purpose:</strong> Calculates the sum of all interior angles in a polygon.</p>
+                        <p><strong>Variables:</strong> n = number of sides.</p>
+                        <p><strong>When to use it:</strong> When determining the total interior angle measure of a polygon.</p>
+                    </div>
+                </div>
+
+                <div class="equation-card">
+                    <button class="equation-toggle" type="button">
+                        <span>Shoelace Formula</span>
+                        <span class="equation-arrow">▼</span>
+                    </button>
+                    <div class="equation-content">
+                        <p class="equation-formula">
+                            A = ½ |Σ(xᵢyᵢ₊₁ − yᵢxᵢ₊₁)|
+                        </p>
+                        <p><strong>Purpose:</strong> Calculates the area of a polygon from its vertex coordinates.</p>
+                        <p><strong>Variables:</strong> (xᵢ, yᵢ) represent consecutive vertices, with the final vertex connected back to the first.</p>
+                        <p><strong>When to use it:</strong> When calculating the area of a polygon on a coordinate plane.</p>
+                    </div>
+                </div>
+
+                <!-- Circles -->
+                <h3 class="equation-category">
+                    Circles
+                </h3>
+
+                <div class="equation-card">
+                    <button class="equation-toggle" type="button">
+                        <span>Circle Area</span>
+                        <span class="equation-arrow">▼</span>
+                    </button>
+                    <div class="equation-content">
+                        <p class="equation-formula">
+                            A = πr²
+                        </p>
+                        <p><strong>Purpose:</strong> Calculates the area enclosed by a circle.</p>
+                        <p><strong>Variables:</strong> r = radius.</p>
+                        <p><strong>When to use it:</strong> When finding the amount of two-dimensional space inside a circle.</p>
+                    </div>
+                </div>
+
+                <div class="equation-card">
+                    <button class="equation-toggle" type="button">
+                        <span>Circumference</span>
+                        <span class="equation-arrow">▼</span>
+                    </button>
+                    <div class="equation-content">
+                        <p class="equation-formula">
+                            C = 2πr = πd
+                        </p>
+                        <p><strong>Purpose:</strong> Calculates the distance around a circle.</p>
+                        <p><strong>Variables:</strong> r = radius; d = diameter.</p>
+                        <p><strong>When to use it:</strong> When finding the perimeter of a circular shape.</p>
+                    </div>
+                </div>
+
+                <!-- General Geometry -->
+                <h3 class="equation-category">
+                    General Geometry
+                </h3>
+
+                <div class="equation-card">
+                    <button class="equation-toggle" type="button">
+                        <span>Pythagorean Theorem</span>
+                        <span class="equation-arrow">▼</span>
+                    </button>
+                    <div class="equation-content">
+                        <p class="equation-formula">
+                            a² + b² = c²
+                        </p>
+                        <p><strong>Purpose:</strong> Describes the relationship between the sides of a right triangle.</p>
+                        <p><strong>Variables:</strong> a and b are the legs; c is the hypotenuse.</p>
+                        <p><strong>When to use it:</strong> When finding a missing side length in a right triangle.</p>
+                    </div>
+                </div>
+
+                <!-- More Coming Soon -->
+
+                <div class="equation-coming-soon">
+
+                    <span class="coming-soon-icon">+</span>
+
+                    <h3>More Coming Soon</h3>
+
+                    <p>
+                        More theroems, formulas, and explanatinos will be added to the library in future updates, so stay posted!
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
 </aside>
         </main>

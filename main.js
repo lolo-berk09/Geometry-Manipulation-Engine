@@ -411,7 +411,7 @@ function updateMathExplorer(object) {
     
         polygonMeasurements = `
         <h4>Polygon Measurements</h4>
-        ${SVGAnimatedLengthList.map((length, index) => `
+        ${sideLength.map((length, index) => `
             <p><strong>Side ${index + 1}:</strong> ${length.toFixed(2)}</p>
             `).join("")}
             <p><strong>Perimeter:</strong> ${perimeter.toFixed(2)}</p>
@@ -2109,3 +2109,252 @@ document.getElementById("zoom-reset").addEventListener("click", () => {
 });
 
 console.log("Geometry Engine initialized with mathematical coordinates.");
+
+// user guide functionality
+
+const userGuideButton = document.getElementById("user-guide-button");
+const userGuideModal = document.getElementById("user-guide-modal");
+const closeUserGuideButton = document.getElementById("close-user-guide");
+
+// get user guide elements
+
+const guideSlideTitle = document.getElementById("guide-slide-title");
+const guideSlideHeading = document.getElementById("guide-slide-heading");
+const guideSlideDescription = document.getElementById("guide-slide-description");
+const guideSlideVisual = document.getElementById("guide-slide-visual");
+
+const guidePreviousButton = document.getElementById("guide-previous");
+const guideNextButton = document.getElementById("guide-next");
+const guideFinishButton = document.getElementById("guide-finish");
+const guideSkipButton = document.getElementById("guide-skip");
+
+const guideDots = document.querySelectorAll(".guide-dot");
+
+// tutorial info
+
+const guideSlides = [
+    {
+        title: "Getting Started",
+        heading: "Welcome to the Geometry Engine!",
+        description: "Explore an interactive coordinate plane where you can create geometric objects, visualize properties, and investigate the mathematics behind them.",
+        visual: "📐"
+    },
+
+    {
+        title: "Understanding the Toolbar",
+        heading: "Your Geometry Toolkit",
+        description: "The toolbar contains several tools for interacting with the coordinate plane. Select lets you explore existing objects, Point places individual points, and the Line, Circle, Rectangle, Triangle, and Polygon tools allow you to construct different geometric objects by connecting points.",
+        visual: "🛠️"
+    },
+
+    {
+        title: "Creating Geometric Objects",
+        heading: "Build Your Geometry",
+        description: "Choose a geometric tool and select the required points on the coordinate plane. Lines connect two points, circles use a center and radius point, rectangles and triangles use their vertices, and polygons connect three or more selected vertices into one enclosed shape. Each are all separate geometric objects.",
+        visual: "✏️"
+    },
+
+    {
+        title: "Selecting Objects",
+        heading: "Explore Your Creations",
+        description: "Choose the Select tool and click an existing point, line, or geometric shape. Selecting an object allows you to examine its properties in the Math Explorer. You can switch between objects whenever you want to investigate something new.",
+        visual: "👆🔍"
+    },
+
+    {
+        title: "Math Explorer",
+        heading: "Discover the Mathematics",
+        description: "The Math Explorer displays information about your selected object, including its ID, vertex coordinates, and mathematical properties. Depending on the object, you can explore measurements such as length, slope, radius, area, perimeter, and interior angles. You can also drag or collapse the panel. The Equation Library provides a place to explore important geometry formulas.",
+        visual: "📊"
+    }
+
+];
+
+// Track the current slide
+
+let currentGuideSlide = 0;
+
+// Display the requested slide
+
+function showGuideSlide(index) {
+    
+    if (index < 0 || index >= guideSlides.length) {
+        return;
+    }
+
+    currentGuideSlide = index;
+
+    const slide = guideSlides[currentGuideSlide];
+
+    // update slide content
+
+    guideSlideTitle.textContent = slide.title;
+    guideSlideHeading.textContent = slide.heading;
+    guideSlideDescription.textContent = slide.description;
+    guideSlideVisual.textContent = slide.visual;
+
+    // update progress indicators
+
+    guideDots.forEach((dot, dotIndex) => {
+
+        dot.classList.toggle("active", dotIndex === currentGuideSlide);
+    });
+
+    // update navigation buttons
+
+    guidePreviousButton.disabled = currentGuideSlide === 0;
+
+    // show finish on the last slide
+
+    if (currentGuideSlide === guideSlides.length - 1) {
+
+        guideNextButton.style.display = "none";
+        guideFinishButton.style.display = "inline-block";
+    } else {
+
+        guideNextButton.style.display = "inline-block";
+        guideFinishButton.style.display = "none";
+    }
+}
+
+// open the user guide
+
+userGuideButton.addEventListener("click", () => {
+
+    showGuideSlide(0);
+
+    userGuideModal.style.display = "flex";
+
+});
+
+// close the user guide
+
+function closeUserGuide() {
+
+    userGuideModal.style.display = "none";
+}
+
+closeUserGuideButton.addEventListener("click", closeUserGuide);
+
+// close when clicking outside the panel
+
+userGuideModal.addEventListener("click", (event) => {
+
+    if (event.target === userGuideModal) {
+
+        closeUserGuide();
+    }
+});
+
+// previous slide
+
+guidePreviousButton.addEventListener("click", () => {
+
+    showGuideSlide(currentGuideSlide - 1);
+});
+
+// next slide
+
+guideNextButton.addEventListener("click", () => {
+
+    showGuideSlide(currentGuideSlide + 1);
+});
+
+// skip tutorial
+
+guideSkipButton.addEventListener("click", closeUserGuide);
+
+// finish tutorial
+
+guideFinishButton.addEventListener("click", closeUserGuide);
+
+// allow users to click progress circles
+
+guideDots.forEach((dot, index) => {
+
+    dot.addEventListener("click", () => {
+
+        const slideIndex = Number(dot.dataset.slide);
+
+        showGuideSlide(slideIndex);
+    });
+});
+
+// close with escape key
+
+document.addEventListener("keydown", (event) => {
+
+    if (event.key === "Escape" && userGuideModal.style.display === "flex") {
+
+        closeUserGuide();
+    }
+});
+
+// intialize the first slide
+
+showGuideSlide(0);
+
+// Equation library
+
+const equationLibraryButton = document.getElementById("equation-library-button");
+const equationLibraryView = document.getElementById("equation-library-view");
+const mathExplorerWelcome = document.getElementById("math-explorer-welcome");
+const mathExplorerDetails = document.getElementById("math-explorer-details");
+const backToMathExplorerButton = document.getElementById("back-to-math-explorer");
+
+// open library
+
+equationLibraryButton.addEventListener("click", function() {
+
+    mathExplorerWelcome.style.display = "none";
+    mathExplorerDetails.style.display = "none";
+    equationLibraryButton.style.display = "none";
+
+    equationLibraryView.style.display = "block";
+});
+
+// return to math explorer
+
+backToMathExplorerButton.addEventListener("click", function() {
+
+    equationLibraryView.style.display = "none";
+
+    mathExplorerWelcome.style.display = "block";
+    mathExplorerDetails.style.display = "block";
+    equationLibraryButton.style.display = "block";
+});
+
+// library expand and collapse
+
+const equationToggles = document.querySelectorAll(".equation-toggle");
+
+equationToggles.forEach(function(toggle) {
+
+    const equationContent = toggle.nextElementSibling;
+
+    // start collapsed
+    toggle.classList.remove("expanded");
+    toggle.setAttribute("aria-expanded", "false");
+
+    toggle.addEventListener("click", function() {
+
+        const isExpanded = toggle.classList.contains("expanded");
+
+        if (isExpanded) {
+
+            // collapse
+            toggle.classList.remove("expanded");
+            toggle.setAttribute("aria-expanded", "false");
+
+        } else {
+            
+            //expand
+            toggle.classList.add("expanded");
+            toggle.setAttribute("aria-expanded", "true");
+        }
+
+    });
+
+});
+   
+
