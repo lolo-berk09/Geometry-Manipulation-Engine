@@ -55,9 +55,8 @@ users can explore:
    When the object is selected, the Math Explorer panel displays information about it, including its coordinates and relevant mathematical properties.
 
 4. Mathematical Visualization
-The Engine displays interior angles and measurements of all shapes and geometric objects.
 
-Use the Hide/Show Intersections & Angles button in the top toolbar to toggle these visualizations on or off.
+The Engine displays interior angles and measurements of all shapes and geometric objects. Use the Hide/Show Intersections & Angles button in the top toolbar to toggle these visualizations on or off.
 
 5. Math Explorer & Equation Library
    The Math Explorer provides mathematical information about a selected object
